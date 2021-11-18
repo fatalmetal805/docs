@@ -1,4 +1,38 @@
----
+--### This workflow has access to secrets and a read-write token
+name: Dependabot Workflow
+on:
+  pull_request_target
+
+permissions:
+  # Downscope as necessary, since you now have a read-write token
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Check out the pull request HEAD
+          ref: ${{ github.event.pull_request.head.sha }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}### This workflow has access to secrets and a read-write token
+name: Dependabot Workflow
+on:
+  pull_request_target
+
+permissions:
+  # Downscope as necessary, since you now have a read-write token
+
+jobs:
+  dependabot:
+    runs-on: ubuntu-latest
+    if: ${{ github.actor == 'dependabot[bot]' }}
+    steps:
+      - uses: actions/checkout@v2
+        with:
+          # Check out the pull request HEAD
+          ref: ${{ github.event.pull_request.head.sha }}
+          github-token: ${{ secrets.GITHUB_TOKEN }}
 title: Allowing changes to a pull request branch created from a fork
 intro: 'For greater collaboration, you can allow commits on branches you''ve created from forks owned by your user account.'
 redirect_from:
